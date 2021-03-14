@@ -100,11 +100,16 @@ void insert(struct Node *ptr,int BB, int pos)
         head=temp;
     }
     else{
-        int c=0;
+        int c=1;
         while(ptr != nullptr)
         {
+            std::cout<<" position "<<c<<" data "<<ptr->data<<std::endl;
             if(c+1==pos)
             {
+                if(ptr->next==nullptr)
+                {
+                    tail=temp;
+                }
                 temp->next=ptr->next;
                 ptr->next=temp;
                 break;
@@ -112,8 +117,8 @@ void insert(struct Node *ptr,int BB, int pos)
             ptr=ptr->next;
             c++;
         }
-        std::cout<<"Inside "<<c<<" "<<pos<<std::endl;
-        if(c<=pos)
+        //std::cout<<"Inside "<<c<<" "<<pos<<std::endl;
+        if(c+1<pos)
         {
             tail->next=temp;
             temp->next=nullptr;
@@ -143,10 +148,13 @@ int main()
      insert(head,500,0);
      insert(head,69,10000);
      insert(head,4,24);
+     insert(head,78,23);
      std::cout<<"Head:"<<head->data<<std::endl;
      std::cout<<"Tail:"<<tail->data<<std::endl;
-    // insert(head,50,3);
+     insert(head,50,3);
+     insert(head,26,26);
+     insert(head,29,29);
      display_forward(head);
      std::cout<<std::endl;
-     display_backward(head);
+     //display_backward(head);
 }
