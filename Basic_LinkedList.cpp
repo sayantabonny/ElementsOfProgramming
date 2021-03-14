@@ -44,9 +44,10 @@ void display_forward(struct Node *ptr)
 {
     if(ptr!=nullptr)
     {
-        std::cout<<ptr->data<<std::endl;
+        std::cout<<ptr->data<<" ";
         display_forward(ptr->next);
     }
+    
     return;
 }
 
@@ -56,9 +57,8 @@ void display_backward(struct Node *ptr)
     {
         
         display_backward(ptr->next);
-        std::cout<<ptr->data<<std::endl;
+        std::cout<<ptr->data<<" ";
     }
-
     return;
 }
 
@@ -90,6 +90,38 @@ int Max_element_NoParameter(struct Node *ptr)
     }
 }
 
+void insert(struct Node *ptr,int BB, int pos)
+{
+    struct Node *temp=new Node();
+    temp->data=BB;
+    if(pos==0)
+    {
+        temp->next=head;
+        head=temp;
+    }
+    else{
+        int c=0;
+        while(ptr != nullptr)
+        {
+            if(c+1==pos)
+            {
+                temp->next=ptr->next;
+                ptr->next=temp;
+                break;
+            }
+            ptr=ptr->next;
+            c++;
+        }
+        std::cout<<"Inside "<<c<<" "<<pos<<std::endl;
+        if(c<=pos)
+        {
+            tail->next=temp;
+            temp->next=nullptr;
+            tail=temp;
+            
+        }
+    }
+}
 
 
 int main()
@@ -106,5 +138,15 @@ int main()
 
     std::cout<<std::endl<<std::endl<<"Maximum Element"<<std::endl;
     //std::cout<<Max_element(head,0);
-    std::cout<<Max_element_NoParameter(head);
+    //std::cout<<Max_element_NoParameter(head);
+     std::cout<<std::endl<<std::endl<<"Inserting Element"<<std::endl;
+     insert(head,500,0);
+     insert(head,69,10000);
+     insert(head,4,24);
+     std::cout<<"Head:"<<head->data<<std::endl;
+     std::cout<<"Tail:"<<tail->data<<std::endl;
+    // insert(head,50,3);
+     display_forward(head);
+     std::cout<<std::endl;
+     display_backward(head);
 }
