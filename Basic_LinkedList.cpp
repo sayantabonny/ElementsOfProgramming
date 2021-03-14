@@ -62,6 +62,36 @@ void display_backward(struct Node *ptr)
     return;
 }
 
+
+
+int Max_element(struct Node *ptr, int max)
+{
+    if(ptr==nullptr)
+    {
+        return max;
+    }
+    else
+    {
+        max=(ptr->data)>max?(ptr->data):max;
+        Max_element(ptr->next,max);
+    }
+}
+
+int Max_element_NoParameter(struct Node *ptr)
+{
+    if(ptr==nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+       int max=Max_element_NoParameter(ptr->next);
+       return (ptr->data)>max?ptr->data:max;
+    }
+}
+
+
+
 int main()
 {
     //int *A= new int[10];
@@ -70,7 +100,11 @@ int main()
     std::cout<<"Head:"<<head->data<<std::endl;
     std::cout<<"Tail:"<<tail->data<<std::endl;
     std::cout<<std::endl<<std::endl<<"Foward Traversal"<<std::endl;
-    display_forward(head);
+    //display_forward(head);
     std::cout<<std::endl<<std::endl<<"Reverse Traversal"<<std::endl;
-    display_backward(head);
+    //display_backward(head);
+
+    std::cout<<std::endl<<std::endl<<"Maximum Element"<<std::endl;
+    //std::cout<<Max_element(head,0);
+    std::cout<<Max_element_NoParameter(head);
 }
