@@ -36,7 +36,7 @@ vector<int> riverSizes(vector<vector<int>> matrix) {
 	vector<int> sizes;
 	int row= matrix.size();
 	int col= matrix[0].size();
-	int size=1;
+	int size=0;
 	for(int i=0;i<row;i++)
 	{
 		for(int j=0;j<col;j++)
@@ -45,9 +45,8 @@ vector<int> riverSizes(vector<vector<int>> matrix) {
 			{
 				size=1;
 				visited[i][j]=true;
-				size=traverseNode(i,j,matrix,visited,size);
-                cout<<"____For ELEMENT___i="<<i<<" j= "<<j<<" value "<<matrix[i][j]<<endl;
-				printmatrix(matrix,visited);
+				size=size+traverseNode(i,j,matrix,visited);
+				
 				if(size>0)
 				{
 					sizes.push_back(size);
@@ -55,13 +54,12 @@ vector<int> riverSizes(vector<vector<int>> matrix) {
 			}
 		}
 	}
-
-  cout<<sizes.size();
+  return sizes;
 }
 
 int traverseNode(int i,int j, vector<vector<int>> &matrix, 
-vector<vector<int>> &visited, int &size){
-	
+vector<vector<int>> &visited){
+	int size=0;
 	int dir[4][4] = {{1,0},{0,1},{-1,0},{0,-1}};
 	for(int k=0;k<4;k++)
 	{
@@ -71,7 +69,7 @@ vector<vector<int>> &visited, int &size){
 				{
 					visited[i+dir[k][0]][j+dir[k][1]]= true;
 					size++;
-					size= traverseNode(i+dir[k][0],j+dir[k][1],matrix,visited,size);
+					size=size+traverseNode(i+dir[k][0],j+dir[k][1],matrix,visited);
 				}
 			}
 	}
